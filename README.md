@@ -24,10 +24,10 @@ OpenClaw Doctor is a professional diagnostic skill for quickly identifying and f
 ```bash
 # Download directly
 curl -o ~/.openclaw/skills/openclaw-doctor.md \
-  https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/openclaw-doctor.md
+  https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/openclaw-doctor.md
 
 # Or clone the repository
-git clone https://github.com/YOUR_USERNAME/openclaw-doctor.git
+git clone https://github.com/AIPMAndy/openclaw-doctor.git
 cp openclaw-doctor/openclaw-doctor.md ~/.openclaw/skills/
 ```
 
@@ -113,10 +113,10 @@ OpenClaw Doctor 是一个专业的诊断 skill，帮助你快速定位和修复 
 ```bash
 # 直接下载
 curl -o ~/.openclaw/skills/openclaw-doctor.md \
-  https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/openclaw-doctor.md
+  https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/openclaw-doctor.md
 
 # 或克隆仓库
-git clone https://github.com/YOUR_USERNAME/openclaw-doctor.git
+git clone https://github.com/AIPMAndy/openclaw-doctor.git
 cp openclaw-doctor/openclaw-doctor.md ~/.openclaw/skills/
 ```
 

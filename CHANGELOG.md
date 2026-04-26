@@ -83,6 +83,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute to this changelog.
 
 ## Links
 
-- [GitHub Repository](https://github.com/YOUR_USERNAME/openclaw-doctor)
-- [Issue Tracker](https://github.com/YOUR_USERNAME/openclaw-doctor/issues)
+- [GitHub Repository](https://github.com/AIPMAndy/openclaw-doctor)
+- [Issue Tracker](https://github.com/AIPMAndy/openclaw-doctor/issues)
 - [OpenClaw Official](https://openclaw.ai)

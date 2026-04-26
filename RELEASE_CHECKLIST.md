@@ -58,8 +58,8 @@ git commit -m "Initial commit: OpenClaw Doctor v1.0.0"
 ### 3. 推送到 GitHub
 
 ```bash
-# 添加远程仓库（替换 YOUR_USERNAME）
-git remote add origin https://github.com/YOUR_USERNAME/openclaw-doctor.git
+# 添加远程仓库（替换 AIPMAndy）
+git remote add origin https://github.com/AIPMAndy/openclaw-doctor.git
 
 # 推送主分支
 git branch -M main
@@ -105,7 +105,7 @@ git push origin v1.0.0
 
 ```bash
 curl -o ~/.openclaw/skills/openclaw-doctor.md \
-  https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/openclaw-doctor.md
+  https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/openclaw-doctor.md
 ```
 
 ## Quick Start
@@ -115,24 +115,24 @@ curl -o ~/.openclaw/skills/openclaw-doctor.md \
 /openclaw-doctor
 
 # Or use scripts
-git clone https://github.com/YOUR_USERNAME/openclaw-doctor.git
+git clone https://github.com/AIPMAndy/openclaw-doctor.git
 cd openclaw-doctor/scripts
 ./quick-diagnostic.sh
 ```
 
 ## Documentation
 
-- [README](https://github.com/YOUR_USERNAME/openclaw-doctor#readme)
+- [README](https://github.com/AIPMAndy/openclaw-doctor#readme)
 - [Scripts Guide](scripts/README.md)
 - [Contributing](CONTRIBUTING.md)
 
 ## Feedback
 
-Found a bug or have a suggestion? [Open an issue](https://github.com/YOUR_USERNAME/openclaw-doctor/issues)!
+Found a bug or have a suggestion? [Open an issue](https://github.com/AIPMAndy/openclaw-doctor/issues)!
 
 ---
 
-**Full Changelog**: https://github.com/YOUR_USERNAME/openclaw-doctor/blob/main/CHANGELOG.md
+**Full Changelog**: https://github.com/AIPMAndy/openclaw-doctor/blob/main/CHANGELOG.md
 ```
 
 6. 点击 "Publish release"
@@ -161,10 +161,10 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/YOUR_USERNA
 在 README.md 顶部添加：
 
 ```markdown
-![GitHub release](https://img.shields.io/github/v/release/YOUR_USERNAME/openclaw-doctor)
-![License](https://img.shields.io/github/license/YOUR_USERNAME/openclaw-doctor)
-![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/openclaw-doctor)
-![GitHub issues](https://img.shields.io/github/issues/YOUR_USERNAME/openclaw-doctor)
+![GitHub release](https://img.shields.io/github/v/release/AIPMAndy/openclaw-doctor)
+![License](https://img.shields.io/github/license/AIPMAndy/openclaw-doctor)
+![GitHub stars](https://img.shields.io/github/stars/AIPMAndy/openclaw-doctor)
+![GitHub issues](https://img.shields.io/github/issues/AIPMAndy/openclaw-doctor)
 ```
 
 ## 持续维护

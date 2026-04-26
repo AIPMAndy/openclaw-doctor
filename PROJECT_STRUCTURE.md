@@ -56,7 +56,7 @@ cp openclaw-doctor.md ~/.openclaw/skills/
 
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/openclaw-doctor.git
+git clone https://github.com/AIPMAndy/openclaw-doctor.git
 cd openclaw-doctor
 
 # 运行诊断

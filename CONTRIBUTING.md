@@ -8,7 +8,7 @@
 
 如果你遇到了新的 OpenClaw 故障，请：
 
-1. 在 [Issues](https://github.com/YOUR_USERNAME/openclaw-doctor/issues) 中搜索是否已有类似问题
+1. 在 [Issues](https://github.com/AIPMAndy/openclaw-doctor/issues) 中搜索是否已有类似问题
 2. 如果没有，创建新 Issue，包含：
    - 问题描述
    - 错误日志

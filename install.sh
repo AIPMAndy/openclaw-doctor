@@ -34,7 +34,7 @@ echo ""
 echo "📥 Downloading openclaw-doctor.md..."
 
 SKILL_FILE="$SKILLS_DIR/openclaw-doctor.md"
-REPO_URL="https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/openclaw-doctor.md"
+REPO_URL="https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/openclaw-doctor.md"
 
 if command -v curl &> /dev/null; then
     curl -fsSL "$REPO_URL" -o "$SKILL_FILE"
@@ -63,13 +63,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "📥 Downloading scripts..."
 
     # 下载脚本
-    curl -fsSL "https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/scripts/quick-diagnostic.sh" \
+    curl -fsSL "https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/scripts/quick-diagnostic.sh" \
         -o "$SCRIPTS_DIR/quick-diagnostic.sh"
 
-    curl -fsSL "https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/scripts/auto-fix.sh" \
+    curl -fsSL "https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/scripts/auto-fix.sh" \
         -o "$SCRIPTS_DIR/auto-fix.sh"
 
-    curl -fsSL "https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-doctor/main/scripts/README.md" \
+    curl -fsSL "https://raw.githubusercontent.com/AIPMAndy/openclaw-doctor/main/scripts/README.md" \
         -o "$SCRIPTS_DIR/README.md"
 
     # 添加执行权限
@@ -98,8 +98,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 echo "Documentation:"
-echo "  https://github.com/YOUR_USERNAME/openclaw-doctor"
+echo "  https://github.com/AIPMAndy/openclaw-doctor"
 echo ""
 echo "Need help? Open an issue:"
-echo "  https://github.com/YOUR_USERNAME/openclaw-doctor/issues"
+echo "  https://github.com/AIPMAndy/openclaw-doctor/issues"
 echo ""
