@@ -1,209 +1,410 @@
-# Scripts Usage Guide | 脚本使用指南
+# OpenClaw Doctor Scripts | 脚本工具集
 
-## Quick Diagnostic Script | 快速诊断脚本
+This directory contains utility scripts for diagnosing, monitoring, and maintaining OpenClaw Gateway.
 
-### 功能
+本目录包含用于诊断、监控和维护 OpenClaw Gateway 的实用脚本。
 
-快速检查 OpenClaw Gateway 的运行状态和常见问题。
+## Scripts Overview | 脚本概览
 
-### 使用方法
+### 1. quick-diagnostic.sh
+**Quick health check for OpenClaw Gateway**
 
+快速健康检查工具，适合日常使用。
+
+**Usage:**
 ```bash
-cd ~/.openclaw/skills/openclaw-doctor/scripts
-./quick-diagnostic.sh
+./scripts/quick-diagnostic.sh
 ```
 
-### 检查项目
+**Checks:**
+- Gateway process status
+- Port 18789 listening
+- Config file permissions
+- Feishu plugin diagnostics
+- Recent log errors
+- npm dependency conflicts
 
-1. ✅ Gateway 进程状态
-2. ✅ 端口 18789 占用情况
-3. ✅ 配置文件权限
-4. ✅ 飞书插件诊断
-5. ✅ 最近的错误日志
-6. ✅ npm 依赖冲突
+**Output:** Text-based report with actionable recommendations
 
-### 输出示例
+---
 
+### 2. advanced-diagnostic.sh
+**Comprehensive system analysis with JSON support**
+
+全面的系统分析工具，支持 JSON 输出，适合自动化集成。
+
+**Usage:**
+```bash
+# Text output
+./scripts/advanced-diagnostic.sh
+
+# JSON output (for automation)
+./scripts/advanced-diagnostic.sh --json
+
+# Show version
+./scripts/advanced-diagnostic.sh --version
+
+# Show help
+./scripts/advanced-diagnostic.sh --help
 ```
-🔍 OpenClaw Doctor - Quick Diagnostic
-======================================
 
-1️⃣  Checking Gateway process...
-✓ Gateway is running
-  PID: 12345, CPU: 2.3%, MEM: 1.5%
+**Checks (10+ items):**
+- Gateway process (PID, CPU, memory)
+- Port status
+- Config file (permissions, validity, JSON syntax)
+- Feishu config completeness
+- Multiple instance detection
+- npm dependency conflicts
+- Plugin dependencies
+- Log error statistics
+- Auto-restart count
+- Disk space usage
+- Node.js and npm versions
 
-2️⃣  Checking port 18789...
-✓ Port 18789 is in use
+**Exit codes:**
+- `0`: All checks passed
+- `1`: Issues found
 
-3️⃣  Checking config file...
-✓ Config file permissions are correct (600)
-
-4️⃣  Running Feishu plugin diagnostics...
-All checks passed!
-
-5️⃣  Checking recent logs...
-Recent errors:
-  No recent errors
-
-6️⃣  Checking for npm dependency conflicts...
-✓ No ~/node_modules found
-
-======================================
-📋 Summary
-======================================
+**JSON Output Example:**
+```json
+{
+  "version": "1.1.0",
+  "timestamp": "2026-04-27T00:00:00Z",
+  "issues_found": 2,
+  "checks": {
+    "gateway_process": {
+      "status": "pass",
+      "message": "Gateway is running (PID: 12345)",
+      "severity": "info"
+    },
+    "config_permissions": {
+      "status": "fail",
+      "message": "Config file permissions are incorrect",
+      "severity": "error"
+    }
+  }
+}
 ```
 
 ---
 
-## Auto Fix Script | 自动修复脚本
+### 3. performance-analyzer.sh
+**Analyze Gateway performance metrics**
 
-### 功能
+性能分析工具，深入分析 Gateway 资源使用情况。
 
-自动修复常见的 OpenClaw 问题。
-
-### 使用方法
-
+**Usage:**
 ```bash
-cd ~/.openclaw/skills/openclaw-doctor/scripts
-./auto-fix.sh
+./scripts/performance-analyzer.sh
 ```
 
-### 修复项目
+**Analysis:**
+- CPU and memory usage
+- Open file descriptors
+- Network connections
+- Thread count
+- Log statistics (24 hours)
+- Response time analysis
+- Dependency storage size
+- Gateway uptime
+- **Health Score (0-100)**
 
-1. 🔧 修复配置文件权限（chmod 600）
-2. 🔧 清理多余的 Gateway 实例
-3. 🔧 移除冲突的 ~/node_modules
-4. 🔧 清理依赖锁文件
-5. 🔧 重启 Gateway
+**Health Score Calculation:**
+- Starts at 100
+- Deducts points for issues:
+  - Too many open files (>1000): -20
+  - High CPU usage (>80%): -15
+  - High memory usage (>50%): -15
+  - High error count (>50): -25
+  - Moderate errors (>10): -10
 
-### 交互式确认
-
-脚本会在执行每个修复操作前询问确认：
-
-```
-Fix config file permissions to 600? (y/n)
-```
-
-输入 `y` 确认，`n` 跳过。
-
-### 安全提示
-
-- ⚠️ 脚本会备份 ~/node_modules 到 ~/node_modules.bak
-- ⚠️ 会强制终止所有 Gateway 进程（pkill -9）
-- ⚠️ 建议先运行 quick-diagnostic.sh 了解问题
+**Score Ratings:**
+- 90-100: Excellent ✅
+- 70-89: Good ✓
+- 50-69: Fair ⚠️
+- 0-49: Poor ❌
 
 ---
 
-## 常见使用场景
+### 4. health-monitor.sh
+**Continuous health monitoring service**
 
-### 场景 1：飞书通道无法启动
+持续健康监控服务，自动检测问题并发出警报。
 
+**Usage:**
 ```bash
-# 1. 先诊断
-./quick-diagnostic.sh
+# Start monitoring (default: check every 60s)
+./scripts/health-monitor.sh
 
-# 2. 如果发现问题，运行修复
-./auto-fix.sh
+# Custom interval and threshold
+./scripts/health-monitor.sh --interval 30 --threshold 5
 
-# 3. 等待 30 秒让依赖安装完成
-sleep 30
+# Custom log file
+./scripts/health-monitor.sh --log /var/log/openclaw-monitor.log
 
-# 4. 再次诊断验证
-./quick-diagnostic.sh
+# Show help
+./scripts/health-monitor.sh --help
 ```
 
-### 场景 2：Gateway 启动失败
+**Options:**
+- `--interval N`: Check interval in seconds (default: 60)
+- `--threshold N`: Alert after N consecutive failures (default: 3)
+- `--log FILE`: Log file path (default: /tmp/openclaw-doctor-monitor.log)
 
+**Monitoring:**
+- Gateway process status
+- Port 18789 listening
+- Recent error rate in logs
+- Status changes logged with timestamps
+
+**Status Levels:**
+- `healthy`: All checks passed ✅
+- `degraded`: High error rate but running ⚠️
+- `unhealthy`: Critical issues detected ❌
+
+**Auto-restart (Optional):**
+Uncomment the auto-restart section in the script to enable automatic recovery.
+
+**Run as background service:**
 ```bash
-# 1. 诊断
-./quick-diagnostic.sh
-
-# 2. 查看详细日志
-tail -100 /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log
-
-# 3. 运行修复
-./auto-fix.sh
-```
-
-### 场景 3：定期健康检查
-
-```bash
-# 添加到 crontab，每小时检查一次
-0 * * * * ~/.openclaw/skills/openclaw-doctor/scripts/quick-diagnostic.sh > /tmp/openclaw-health.log 2>&1
+nohup ./scripts/health-monitor.sh > /tmp/monitor.log 2>&1 &
 ```
 
 ---
 
-## 故障排除
+### 5. auto-fix.sh
+**Automated issue resolution**
 
-### 脚本无法执行
+自动修复常见问题的工具。
 
+**Usage:**
 ```bash
-# 确保脚本有执行权限
-chmod +x quick-diagnostic.sh
-chmod +x auto-fix.sh
+./scripts/auto-fix.sh
 ```
 
-### npx 命令不可用
+**Fixes:**
+1. Config file permissions (chmod 600)
+2. Multiple Gateway instances (kill duplicates)
+3. npm dependency conflicts (move ~/node_modules)
+4. Dependency locks (clear stale locks)
+5. Gateway restart
+
+**Safety:**
+- Asks for confirmation before each action
+- Creates safety backup before restore
+- Non-destructive by default
+
+---
+
+### 6. backup-restore.sh
+**Backup and restore OpenClaw configuration**
+
+备份和恢复 OpenClaw 配置的工具。
+
+**Usage:**
+```bash
+# Create backup
+./scripts/backup-restore.sh backup
+
+# List all backups
+./scripts/backup-restore.sh list
+
+# Restore from backup
+./scripts/backup-restore.sh restore 20260427_120000
+
+# Clean old backups (keep last 10)
+./scripts/backup-restore.sh clean
+
+# Show help
+./scripts/backup-restore.sh --help
+```
+
+**Backup Contents:**
+- `openclaw.json` configuration file
+- `skills/` directory
+- `plugins/` directory (if exists)
+- Metadata (timestamp, versions)
+
+**Backup Location:**
+`~/.openclaw-backups/openclaw_backup_YYYYMMDD_HHMMSS.tar.gz`
+
+**Safety Features:**
+- Creates safety backup before restore
+- Requires user confirmation
+- Automatically sets correct permissions
+- Keeps metadata for tracking
+
+---
+
+## Usage Scenarios | 使用场景
+
+### Daily Health Check | 日常健康检查
+```bash
+./scripts/quick-diagnostic.sh
+```
+
+### Deep Troubleshooting | 深度故障排查
+```bash
+./scripts/advanced-diagnostic.sh
+./scripts/performance-analyzer.sh
+```
+
+### Continuous Monitoring | 持续监控
+```bash
+# Start in background
+nohup ./scripts/health-monitor.sh --interval 60 --threshold 3 > /tmp/monitor.log 2>&1 &
+
+# Check monitor log
+tail -f /tmp/monitor.log
+```
+
+### Before Configuration Changes | 配置变更前
+```bash
+# Create backup
+./scripts/backup-restore.sh backup
+
+# Make changes...
+
+# If something goes wrong, restore
+./scripts/backup-restore.sh restore <backup_date>
+```
+
+### CI/CD Integration | CI/CD 集成
+```bash
+# Run diagnostic and fail if issues found
+./scripts/advanced-diagnostic.sh --json > diagnostic.json
+if [ $? -ne 0 ]; then
+  echo "Health check failed"
+  cat diagnostic.json
+  exit 1
+fi
+```
+
+### Performance Optimization | 性能优化
+```bash
+# Analyze current performance
+./scripts/performance-analyzer.sh
+
+# Check health score
+# If score < 70, investigate issues
+```
+
+---
+
+## Automation Examples | 自动化示例
+
+### Cron Jobs | 定时任务
 
 ```bash
-# 安装 Node.js 和 npm
+# Edit crontab
+crontab -e
+
+# Add these lines:
+
+# Hourly health check
+0 * * * * /path/to/openclaw-doctor/scripts/advanced-diagnostic.sh >> /tmp/openclaw-health.log 2>&1
+
+# Daily backup at 2 AM
+0 2 * * * /path/to/openclaw-doctor/scripts/backup-restore.sh backup >> /tmp/openclaw-backup.log 2>&1
+
+# Weekly cleanup on Sunday at 3 AM
+0 3 * * 0 /path/to/openclaw-doctor/scripts/backup-restore.sh clean >> /tmp/openclaw-backup.log 2>&1
+
+# Daily performance report at 6 AM
+0 6 * * * /path/to/openclaw-doctor/scripts/performance-analyzer.sh >> /tmp/openclaw-performance.log 2>&1
+```
+
+### systemd Service | 系统服务
+
+Create `/etc/systemd/system/openclaw-monitor.service`:
+
+```ini
+[Unit]
+Description=OpenClaw Health Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=your-user
+ExecStart=/path/to/openclaw-doctor/scripts/health-monitor.sh --interval 60 --threshold 3
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start:
+```bash
+sudo systemctl enable openclaw-monitor
+sudo systemctl start openclaw-monitor
+sudo systemctl status openclaw-monitor
+```
+
+---
+
+## Troubleshooting | 故障排查
+
+### Script Permission Denied
+```bash
+chmod +x scripts/*.sh
+```
+
+### Command Not Found
+```bash
+# Ensure you're in the openclaw-doctor directory
+cd /path/to/openclaw-doctor
+
+# Or use absolute path
+/path/to/openclaw-doctor/scripts/quick-diagnostic.sh
+```
+
+### jq Not Found
+```bash
 # macOS
-brew install node
+brew install jq
 
 # Ubuntu/Debian
-sudo apt-get install nodejs npm
+sudo apt-get install jq
+
+# CentOS/RHEL
+sudo yum install jq
 ```
 
-### 权限不足
-
+### lsof Not Found
+Usually pre-installed on Unix systems. If missing:
 ```bash
-# 某些操作可能需要 sudo
-sudo ./auto-fix.sh
+# Ubuntu/Debian
+sudo apt-get install lsof
+
+# macOS (should be pre-installed)
+# If missing, install via Xcode Command Line Tools
+xcode-select --install
 ```
 
 ---
 
-## 高级用法
+## Best Practices | 最佳实践
 
-### 静默模式（非交互）
-
-修改 `auto-fix.sh`，将所有 `confirm` 函数调用改为直接返回 true：
-
-```bash
-# 原代码
-if confirm "Fix config file permissions to 600?"; then
-
-# 修改为
-if true; then
-```
-
-### 自定义检查项
-
-在 `quick-diagnostic.sh` 中添加自定义检查：
-
-```bash
-# 添加在文件末尾
-echo "7️⃣  Custom check..."
-# 你的检查逻辑
-echo ""
-```
-
-### 集成到 CI/CD
-
-```yaml
-# GitHub Actions 示例
-- name: OpenClaw Health Check
-  run: |
-    ~/.openclaw/skills/openclaw-doctor/scripts/quick-diagnostic.sh
-```
+1. **Run quick-diagnostic.sh daily** for routine checks
+2. **Use advanced-diagnostic.sh** when issues occur
+3. **Enable health-monitor.sh** for production environments
+4. **Create backups** before making configuration changes
+5. **Review performance-analyzer.sh** weekly
+6. **Set up cron jobs** for automated monitoring
+7. **Keep scripts updated** with the latest version
 
 ---
 
-## 贡献
+## Contributing | 贡献
 
-如果你有新的诊断或修复脚本想法，欢迎提交 PR！
+Found a bug or have a feature request? Please open an issue:
+https://github.com/AIPMAndy/openclaw-doctor/issues
 
-## 许可证
+Want to contribute? See [CONTRIBUTING.md](../CONTRIBUTING.md)
 
-MIT License
+---
+
+## License | 许可证
+
+MIT License - see [LICENSE](../LICENSE)
