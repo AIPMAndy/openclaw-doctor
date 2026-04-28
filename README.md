@@ -27,9 +27,10 @@
 | 自动修复 | ❌ | **一键修复** ✅ |
 | 持续监控 | ❌ | **24/7 监控** ✅ |
 | 飞书通道专项 | ❌ | **深度优化** ✅ |
+| 飞书平台监控 | ❌ | **自动追踪更新** ✅ |
 | CI/CD 集成 | ❌ | **JSON 输出** ✅ |
 
-**核心差异**：不只是诊断工具，而是完整的 OpenClaw 健康管理系统。
+**核心差异**：不只是诊断工具，而是完整的 OpenClaw 健康管理系统 + 飞书开放平台更新监控。
 
 ---
 
@@ -79,6 +80,11 @@ openclaw-doctor
 - **WebSocket vs Long-Polling**：自动识别并建议最佳连接模式
 - **API 凭证验证**：一键检查 appId、appSecret 配置
 - **消息无响应诊断**：定位 agent 启动延迟问题
+- **🆕 飞书平台更新监控**：自动追踪飞书 API、CLI 和文档更新
+  - 监控飞书开放平台 API 更新日志
+  - 追踪飞书 CLI GitHub releases
+  - 检测开放平台文档变化
+  - 自动缓存和对比，只通知真实更新
 
 ---
 
@@ -143,6 +149,18 @@ fi
 nohup ./scripts/health-monitor.sh --interval 60 --threshold 3 > /tmp/monitor.log 2>&1 &
 ```
 
+### 场景 6：飞书平台更新监控
+```bash
+# 检查飞书开放平台更新
+./scripts/feishu-monitor.sh
+
+# 查看监控日志
+cat ~/.openclaw/cache/feishu-monitor/monitor.log
+
+# 集成到 openclaw doctor
+openclaw-doctor --check feishu-updates
+```
+
 ---
 
 ## 🛠️ 工具箱
@@ -153,6 +171,7 @@ nohup ./scripts/health-monitor.sh --interval 60 --threshold 3 > /tmp/monitor.log
 | `advanced-diagnostic.sh` | 全面深度分析 | 文本/JSON | ~30s |
 | `performance-analyzer.sh` | 性能分析+评分 | 文本+评分 | ~20s |
 | `health-monitor.sh` | 持续监控 | 日志文件 | 持续 |
+| `feishu-monitor.sh` | 🆕 飞书平台更新监控 | 日志文件 | ~15s |
 | `auto-fix.sh` | 自动修复 | 交互式 | ~2min |
 | `backup-restore.sh` | 配置管理 | 交互式 | ~10s |
 
